@@ -1,0 +1,132 @@
+import java.util.Scanner;
+public class Riva
+{
+	static Scanner in = new Scanner(System.in);
+	public static void main(String[] args)
+	{
+		while(true)
+		{
+			stampaMenu();
+			int scelta = in.nextInt();
+			switch(scelta)
+			{
+				case 1:
+					prodottoIndici();
+				break;
+				case 2:
+					dueSequenze();
+				break;
+				default:
+					System.out.println("Scelta errata, riprova!");
+			}
+		}
+	}
+	static void stampaMenu()
+	{
+		System.out.println("1 - Prodotto tra gli indici");
+		System.out.println("2 - Due sequenze");
+	}
+	
+	static void prodottoIndici()
+	{
+		//Dichiaro i due array (il secondo di lunghezza metà del primo)
+		double [] array = new double [4];
+		double [] secondoArray = new double [array.length/2];
+		//for per riempire il primo array (si chiama "array")
+		for (int i=0; i<array.length; i++)
+		{
+			System.out.print("Inserisci un numero SOLAMENTE con la virgola:" + " ");
+			array[i] = in.nextDouble();
+			/*
+			 *	Ho provato ad utilizzare il "replace" per poter digitare sia il "." che la ",", ma
+			 * 	se lo utilizzo il programma mi da errore
+			 */
+		}
+		
+		/*
+		 * 	La i serve come variabile per "secondoArray" per inserirci i valori delle moltiplicazioni
+		 * 	delle coppie di elementi di "array".
+		 * 	La j invece come variabile per il for e per indicare gli elementi di "array" nelle varie posizoni
+		 */
+		int i=0;
+		for (int j=1; i<secondoArray.length; j+=2)
+		{
+			/*	Rappresenta la moltiplicazione che deve avvenire tra le coppie di elementi di "array",
+			 * 	mettendole in "secondoArray"
+			 */
+			secondoArray[i] = array[j]*array[j-1];
+			i++;
+		}
+		
+		//print e for per visualizzare in output il risultato voluto (contenuto nell'array "secondoArray")
+		System.out.println("L'array risultante è:");
+		/*
+		 * Questo for ha lunghezza uguale a "secondoArray" perchè deve essere visualzziato in output
+		 * un array di lunghezza dimezzata rispetto a quello in cui si inseriscono i dati di input
+		 */
+		for (int k=0; k<secondoArray.length; k++)
+		{
+			System.out.print(secondoArray[k] + "  ");
+		}
+		System.out.println();
+	}
+	
+	static void dueSequenze()
+	{
+		/*	Dichiaro due array di stringhe e una variabile booleana per il controllo che è 
+		 *	stato richiesto dalla consegna dell'esercizio
+		 */
+		String [] array = new String [3];
+		String [] array2 = new String [3];
+		boolean stringheRipetute = false;
+		
+		/*	
+		 *  Mi ripete due volte consecutive la richiesta "Inserisci una stringa" e
+		 *	quindi, sul numero totale di stringhe che dovrei inseire, ne inserisco una di meno.
+		 *	Ho provato di tutto, ma non riesco a risolvere.
+		 */
+		//for per riempire il primo array di stringhe
+		for (int i=0; i<array.length; i++)
+		{
+			System.out.println("Inserisci una stringa");
+			array[i] = in.nextLine();
+		}
+		//for per riempire il secondo array di stringhe
+		for (int j=0; j<array2.length; j++)
+		{
+			System.out.println("Inserisci una seconda stringa");
+			array2[j] = in.nextLine();
+		}
+		
+		/*	Due for, con naturalmente l'if per chiedere la condizione, per controllare se esistono
+		 * 	stringhe uguali tra il primo array di stringhe ed il secondo array di stringhe
+		 */
+		for (int i=0; i<array.length; i++)
+		{
+			for (int j=0; j<array2.length; j++)
+			{
+				/*
+				 * 	Per verificare se esistono elementi uguali in due array di stringhe,
+				 * 	non si deve utilizzare "==", ma si deve usare ".equals"
+				 */
+				if (array[i].equals(array2[j]))
+				{
+					/*
+					 * 	Se ci sono elementi uguali tra i due array, allora la variabile booleana
+					 * 	"stringheRipetute" assumerà valore true e quindi verrà visualizzato in output "OK"
+					 */
+					stringheRipetute = true;
+					System.out.println("OK");
+				}
+			}
+		}
+		/*
+		 * 	Se la variabile booleana "stringheRipetute" assumerà valore false, quindi non ci sono elementi
+		 * 	uguali tra i due array, allora verrà visualizzato in output "NO"
+		 */
+		if (stringheRipetute == false)
+		{
+			System.out.println("NO");
+		}
+	}
+}
